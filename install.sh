@@ -12,6 +12,7 @@ echo Copying files...
 cp ./main.sh $dest
 cp ./install.sh $dest
 cp ./wipe.sh $dest
+cp ./LICENSE $dest
 cp ./favconfig $dest
 cp ./cmds.ini $dest
 cp ./README.md $dest
