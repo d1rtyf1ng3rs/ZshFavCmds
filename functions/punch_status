@@ -1,0 +1,13 @@
+punch_status(){
+        isgit=$(git status --short 2>&1)
+        rx=".*Not.a.git.repo.*"
+        #echo "[$isgit]"
+        clear
+        if [[ "$isgit" =~ "$rx" ]] then
+                # echo "No, no, es no git here";
+                ls -l
+        else
+                git status
+        fi
+        zle reset-prompt
+}

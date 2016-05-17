@@ -1,0 +1,2 @@
+res=$(~/.zsh/main.sh 8)
+zle favcmd_print

@@ -1,0 +1,4 @@
+zle reset-prompt
+zle -K main
+LBUFFER=""
+clear

@@ -1,0 +1,59 @@
+fpath=($fpath ~/.zsh/functions)
+
+autoload -U get_line
+autoload -U get_line_list
+autoload -U clean_clear
+autoload -U get_line_01
+autoload -U get_line_02
+autoload -U get_line_03
+autoload -U get_line_04
+autoload -U get_line_05
+autoload -U get_line_06
+autoload -U get_line_07
+autoload -U get_line_08
+autoload -U get_line_09
+autoload -U favcmd_cancel
+autoload -U favcmd_print
+autoload -U clean_clear_gomain
+autoload -U punch_status
+autoload -U punch_status_gomain
+
+zle -N get_line
+zle -N get_line_list
+zle -N clean_clear
+zle -N get_line_01
+zle -N get_line_02
+zle -N get_line_03
+zle -N get_line_04
+zle -N get_line_05
+zle -N get_line_06
+zle -N get_line_07
+zle -N get_line_08
+zle -N get_line_09
+zle -N favcmd_cancel
+zle -N favcmd_print
+zle -N clean_clear_gomain
+zle -N punch_status
+
+bindkey -N selcmd
+bindkey -M selcmd '1' get_line_01
+bindkey -M selcmd '2' get_line_02
+bindkey -M selcmd '3' get_line_03
+bindkey -M selcmd '4' get_line_04
+bindkey -M selcmd '5' get_line_05
+bindkey -M selcmd '6' get_line_06
+bindkey -M selcmd '7' get_line_07
+bindkey -M selcmd '8' get_line_08
+bindkey -M selcmd '9' get_line_09
+#bindkey -M selcmd ' ' favcmd_cancel # currently not working
+
+# may need attention / editing depending on terminal used
+bindkey -M selcmd '[^' favcmd_cancel
+bindkey -M selcmd ';2A' get_line_list
+bindkey -M selcmd ';2B' clean_clear_gomain
+bindkey -M selcmd ';2C' favcmd_cancel
+bindkey ';2A' get_line_list
+bindkey ';2B' clean_clear_gomain
+bindkey ';2C' punch_status
+
+
