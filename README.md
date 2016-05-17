@@ -1,5 +1,6 @@
 ## About
 ZshFavCmds is a ZShell plugin for fast & easy access to favorite commands.
+Allows hotkey-picking a command from pre-defined list.
 
 ## Installation
 Clone anywhere, `cd` there, and launch `./install.sh`
@@ -13,3 +14,6 @@ Default keybindings:
 * Shift + Down: Clear screen & exit __pick-command mode__
 * shift + Right (in pick-command mode): Clear screen & exit __pick-command mode__
 * shift + Right (not in pick-command mode): `git status` if in git repo, `ls -l` otherwise
+
+## Uninstall
+Use `~/.zsh/wipe.sh`.
