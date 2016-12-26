@@ -1,3 +1,0 @@
-res=$(~/.zsh/main.sh)
-LBUFFER=$res
-zle -K selcmd

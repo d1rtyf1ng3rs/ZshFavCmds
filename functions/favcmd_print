@@ -1,2 +1,0 @@
-LBUFFER=$res
-zle -K main

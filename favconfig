@@ -1,6 +1,188 @@
-fpath=($fpath ~/.zsh/functions)
+function dothemagic {
+	typeset -A cmds
 
-autoload -U get_line
+
+	#####################
+	cmds[1]="Fav Folders";
+	cmds[1,1]="cd ~/Job/";
+	cmds[1,2]="cd ~/Sources/";
+	cmds[1,3]="cd /etc/nginx/sites-enabled/";
+	cmds[2]="Some configs";
+	cmds[2,1]="vim ~/.zsh/favconfig";
+	cmds[2,2]="sudo vim /etc/hosts";
+	cmds[3]="Remotes";
+	cmds[3,1]="ssh foobar@baz.com";
+	#####################
+
+	if [[ -z $arg ]]; then
+		if [[ -z $grp ]]; then
+			# если вызов без $grp и без аргументов - вывалить группы
+			res="";
+			for x in {1..9}; do
+				groupname=$cmds[$x];
+				if [[ -z $groupname ]]; then
+				else
+					res="$res
+	$x: $groupname";
+				fi;
+			done;
+			LBUFFER=$res
+		else
+			# если вызов без $arg и с группой - вывалить ее комманды
+			res="";
+			for x in {1..9}; do
+				currentcmd=$cmds[$grp,$x];
+				if [[ -z $currentcmd ]]; then
+				else
+					res="$res
+	$x: $currentcmd";
+				fi;
+			done;
+			res="$res
+	0: back";
+			LBUFFER=$res
+		fi;
+	else
+		# если вызов с $grp и с аргументом - вернуть команду и задать exit=1
+		res=$cmds[$grp,$arg];
+		LBUFFER=$res
+		zle -K main
+		doexit=1
+		grp=''
+		arg=''
+	fi;
+}
+function get_line_list {
+	grp=''
+	arg=''
+	zle dothemagic
+	LBUFFER=$res
+	if [[ -z $doexit ]]; then
+		zle -K selcmd
+	else
+		zle -K main
+		grp=''
+		arg=''
+		doexit=''
+	fi;
+}
+function clean_clear {
+	zle reset-prompt
+	grp=0
+	arg=0
+	doexit=0
+	LBUFFER=""
+	clear
+}
+function get_line_01 {
+	if [[ -z $grp ]]; then
+		grp=1
+	else
+		arg=1
+		doexit=1
+	fi;
+	zle dothemagic
+}
+function get_line_02 {
+	if [[ -z $grp ]]; then
+		grp=2
+	else
+		arg=2
+		doexit=1
+	fi;
+	zle dothemagic
+}
+function get_line_03 {
+	if [[ -z $grp ]]; then
+		grp=3
+	else
+		arg=3
+		doexit=1
+	fi;
+	zle dothemagic
+}
+function get_line_04 {
+	if [[ -z $grp ]]; then
+		grp=4
+	else
+		arg=4
+		doexit=1
+	fi;
+	zle dothemagic
+}
+function get_line_05 {
+	if [[ -z $grp ]]; then
+		grp=5
+	else
+		arg=5
+		doexit=1
+	fi;
+	zle dothemagic
+}
+function get_line_06 {
+	if [[ -z $grp ]]; then
+		grp=6
+	else
+		arg=6
+		doexit=1
+	fi;
+	zle dothemagic
+}
+function get_line_07 {
+	if [[ -z $grp ]]; then
+		grp=7
+	else
+		arg=7
+		doexit=1
+	fi;
+	zle dothemagic
+}
+function get_line_08 {
+	if [[ -z $grp ]]; then
+		grp=8
+	else
+		arg=8
+		doexit=1
+	fi;
+	zle dothemagic
+}
+function get_line_09 {
+	if [[ -z $grp ]]; then
+		grp=9
+	else
+		arg=9
+		doexit=1
+	fi;
+	zle dothemagic
+}
+function favcmd_cancel {
+	zle reset-prompt
+	LBUFFER=""
+	zle -K main
+}
+function clean_clear_gomain {
+	zle reset-prompt
+	zle -K main
+	grp=''
+	agr=''
+	doexit=''
+	LBUFFER=""
+	clear
+}
+function punch_status {
+    isgit=$(git status --short 2>&1)
+    rx=".*Not.a.git.repo.*"
+    #echo "[$isgit]"
+    clear
+    if [[ "$isgit" =~ "$rx" ]] then
+            # echo "No, no, es no git here";
+            ls -l
+    else
+            git status
+    fi
+    zle reset-prompt
+}
+
 autoload -U get_line_list
 autoload -U clean_clear
 autoload -U get_line_01
@@ -16,9 +198,8 @@ autoload -U favcmd_cancel
 autoload -U favcmd_print
 autoload -U clean_clear_gomain
 autoload -U punch_status
-autoload -U punch_status_gomain
+autoload -U dothemagic
 
-zle -N get_line
 zle -N get_line_list
 zle -N clean_clear
 zle -N get_line_01
@@ -34,6 +215,7 @@ zle -N favcmd_cancel
 zle -N favcmd_print
 zle -N clean_clear_gomain
 zle -N punch_status
+zle -N dothemagic
 
 bindkey -N selcmd
 bindkey -M selcmd '1' get_line_01
@@ -45,6 +227,7 @@ bindkey -M selcmd '6' get_line_06
 bindkey -M selcmd '7' get_line_07
 bindkey -M selcmd '8' get_line_08
 bindkey -M selcmd '9' get_line_09
+bindkey -M selcmd '0' get_line_list
 #bindkey -M selcmd ' ' favcmd_cancel # currently not working
 
 # may need attention / editing depending on terminal used

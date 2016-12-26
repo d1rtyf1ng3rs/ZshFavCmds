@@ -1,13 +1,14 @@
 ## About
-ZshFavCmds is a ZShell plugin for fast & easy access to favorite commands.
+ZshFavCmds is a ZShell widget for fast & easy access to favorite commands.
 Allows hotkey-picking a command from pre-defined list.
 
 ## Installation
-Clone anywhere, `cd` there, and launch `./install.sh`
+Download and include 'favconfig' in Your ~/.zshrc file.
+Or simply use ./install.sh :)
 
 ## Settings
 All of the zsh settings are located in `favconfig` file.
-Keybindings are also here. They may require editing, depending on terminal used.
+Keybindings are also there. They may require editing, depending on terminal used.
 Current keybindings are made, working & tested on Guake and Gnome terminal.
 Default keybindings:
 * Shift + Up: List favorive commands & _switch to pick-command mode_

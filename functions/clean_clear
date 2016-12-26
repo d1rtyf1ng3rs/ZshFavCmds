@@ -1,3 +1,0 @@
-zle reset-prompt
-LBUFFER=""
-clear
